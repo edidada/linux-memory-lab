@@ -44,7 +44,7 @@ int main(void)
     lab_log("PIE + ASLR randomize ABSOLUTE addresses, but the relative layout");
     lab_log("(text/rodata/data/bss < heap < mmap < stack) is preserved.");
     lab_log("Compare 'machine' and address widths across x86-64 and ARM64 logs.");
-    lab_log("");
+    lab_log("%s", "");
     lab_log("%-26s %-18s %s", "OBJECT", "ADDRESS", "VMA (from /proc/self/maps)");
     lab_log_addr_map("global .data (g_data)",   AS_VOIDP(&g_data));
     lab_log_addr_map("global .bss (g_bss)",     AS_VOIDP(&g_bss));
@@ -57,7 +57,7 @@ int main(void)
     lab_log_addr_map("mmap anonymous",          AS_VOIDP(anon));
     lab_log_addr_map("&ro_literal (stack ptr)",  AS_VOIDP(&ro_literal));
 
-    lab_log("");
+    lab_log("%s", "");
     lab_log("live values: g_data=0x%x g_bss=%d g_static=%d stack=0x%x",
             (unsigned)g_data, (int)g_bss, (int)g_static, (unsigned)stack_var);
     lab_log("rodata='%s'", ro_literal);

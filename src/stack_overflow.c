@@ -13,6 +13,12 @@
  * a real stack frame per invocation (no sibling/tail-call folding). A lowered
  * RLIMIT_STACK in the child makes exhaustion fast and reproducible.
  */
+/* The unbounded recursion is intentional: it is what exhausts the stack.
+ * Silence GCC's -Winfinite-recursion for this one deliberate function. */
+#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ >= 12
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Winfinite-recursion"
+#endif
 __attribute__((noinline))
 static int recurse(int depth)
 {
@@ -22,6 +28,9 @@ static int recurse(int depth)
     int deeper = recurse(depth + 1);
     return deeper + buffer[0];   /* use after the call -> not a tail call */
 }
+#if defined(__GNUC__) && !defined(__clang__) && __GNUC__ >= 12
+#  pragma GCC diagnostic pop
+#endif
 
 static int overflow(void *arg)
 {

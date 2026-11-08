@@ -24,7 +24,7 @@ static void stamp(char *buf, size_t n)
 {
     struct timespec ts;
     struct tm tm;
-    char t[32];
+    char t[16];
 
     clock_gettime(CLOCK_REALTIME, &ts);
     localtime_r(&ts.tv_sec, &tm);
@@ -86,7 +86,7 @@ int lab_log_init(const char *prog)
 
 void lab_log(const char *fmt, ...)
 {
-    char stampbuf[32];
+    char stampbuf[64];
     char line[4096];
     va_list ap;
 
