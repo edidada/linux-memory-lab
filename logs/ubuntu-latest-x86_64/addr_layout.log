@@ -1,76 +1,76 @@
-[01:58:25.799] ======================================================================
-[01:58:25.799] linux-memory-lab :: addr_layout
-[01:58:25.799] ======================================================================
-[01:58:25.799] ======================================================================
-[01:58:25.799] ENVIRONMENT
-[01:58:25.799] ======================================================================
-[01:58:25.799] sysname      : Linux
-[01:58:25.799] release      : 7.0.0-1017-azure
-[01:58:25.799] version      : #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026
-[01:58:25.799] machine      : x86_64
-[01:58:25.799] nodename     : runnervm7aw5e
-[01:58:25.799] pid          : 2345
-[01:58:25.799] pointer bits : 64
-[01:58:25.799] page size    : 4096 bytes
-[01:58:25.799] compiler     : 13.3.0
-[01:58:25.799] target arch  : x86-64 (AMD64)
-[01:58:25.799] byte order   : little-endian
-[01:58:25.799] cpu          : model name	: AMD EPYC 9V45 96-Core Processor
-[01:58:25.799] ======================================================================
-[01:58:25.799] CORE EXPERIMENT - C objects -> virtual addresses (README 九)
-[01:58:25.799] ======================================================================
-[01:58:25.799] PIE + ASLR randomize ABSOLUTE addresses, but the relative layout
-[01:58:25.799] (text/rodata/data/bss < heap < mmap < stack) is preserved.
-[01:58:25.799] Compare 'machine' and address widths across x86-64 and ARM64 logs.
-[01:58:25.799] 
-[01:58:25.799] OBJECT                     ADDRESS            VMA (from /proc/self/maps)
-[01:58:25.799]   global .data (g_data)  0x556e5c8d4010 -> 0x556e5c8d4000-0x556e5c8d5000 rw-p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.799]   global .bss (g_bss)    0x556e5c8d4050 -> 0x556e5c8d4000-0x556e5c8d5000 rw-p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.799]   static .bss (g_static) 0x556e5c8d404c -> 0x556e5c8d4000-0x556e5c8d5000 rw-p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.799]   .rodata literal        0x556e5c8d2008 -> 0x556e5c8d2000-0x556e5c8d3000 r--p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.799]   function .text         0x556e5c8d07c0 -> 0x556e5c8d0000-0x556e5c8d2000 r-xp /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.799]   libc printf .text      0x7fd698c60100 -> 0x7fd698c28000-0x7fd698db1000 r-xp /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.799]   local (stack)          0x7ffd0dbd69ec -> 0x7ffd0dbb7000-0x7ffd0dbd9000 rw-p [stack]
-[01:58:25.799]   malloc heap            0x556e844dd2a0 -> 0x556e844dd000-0x556e844fe000 rw-p [heap]
-[01:58:25.800]   mmap anonymous         0x7fd698e1b000 -> 0x7fd698e1b000-0x7fd698e2e000 rw-p [anon]
-[01:58:25.800]   &ro_literal (stack ptr) 0x7ffd0dbd69f0 -> 0x7ffd0dbb7000-0x7ffd0dbd9000 rw-p [stack]
-[01:58:25.800] 
-[01:58:25.800] live values: g_data=0x11223344 g_bss=0 g_static=0 stack=0x55
-[01:58:25.800] rodata='linux-memory-lab .rodata literal'
-[01:58:25.800] ======================================================================
-[01:58:25.800] THE THREE CHAINS (README 九)
-[01:58:25.800] ======================================================================
-[01:58:25.800] 1) C var -> GCC -> ELF .text/.data/.bss -> ELF loader -> VMA
-[01:58:25.800]    -> page table -> MMU -> physical RAM
-[01:58:25.800] 2) malloc() -> glibc allocator -> brk/mmap -> demand paging
-[01:58:25.800] 3) C pointer -> LOAD/STORE -> MMU -> page fault -> SIGSEGV on error
-[01:58:25.800] Not every page fault is a bug: demand paging and COW are normal.
-[01:58:25.800] ======================================================================
-[01:58:25.800] /proc/self/maps (complete VMA list)
-[01:58:25.800] ======================================================================
-[01:58:25.800]   556e5c8cf000-556e5c8d0000 r--p 00000000 103:01 9176133                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.800]   556e5c8d0000-556e5c8d2000 r-xp 00001000 103:01 9176133                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.800]   556e5c8d2000-556e5c8d3000 r--p 00003000 103:01 9176133                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.800]   556e5c8d3000-556e5c8d4000 r--p 00004000 103:01 9176133                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.800]   556e5c8d4000-556e5c8d5000 rw-p 00005000 103:01 9176133                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
-[01:58:25.800]   556e844dd000-556e844fe000 rw-p 00000000 00:00 0                          [heap]
-[01:58:25.800]   7fd698c00000-7fd698c28000 r--p 00000000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.800]   7fd698c28000-7fd698db1000 r-xp 00028000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.800]   7fd698db1000-7fd698e00000 r--p 001b1000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.800]   7fd698e00000-7fd698e04000 r--p 001ff000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.800]   7fd698e04000-7fd698e06000 rw-p 00203000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.800]   7fd698e06000-7fd698e13000 rw-p 00000000 00:00 0 
-[01:58:25.800]   7fd698e1b000-7fd698e2e000 rw-p 00000000 00:00 0 
-[01:58:25.800]   7fd698e38000-7fd698e3a000 rw-p 00000000 00:00 0 
-[01:58:25.800]   7fd698e3a000-7fd698e3e000 r--p 00000000 00:00 0                          [vvar]
-[01:58:25.800]   7fd698e3e000-7fd698e40000 r--p 00000000 00:00 0                          [vvar_vclock]
-[01:58:25.800]   7fd698e40000-7fd698e42000 r-xp 00000000 00:00 0                          [vdso]
-[01:58:25.800]   7fd698e42000-7fd698e43000 r--p 00000000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.800]   7fd698e43000-7fd698e6e000 r-xp 00001000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.800]   7fd698e6e000-7fd698e78000 r--p 0002c000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.800]   7fd698e78000-7fd698e7a000 r--p 00036000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.800]   7fd698e7a000-7fd698e7c000 rw-p 00038000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.800]   7ffd0dbb7000-7ffd0dbd9000 rw-p 00000000 00:00 0                          [stack]
-[01:58:25.800]   ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
-[01:58:25.800] FINAL: PASS
-[01:58:25.800] log file: /home/runner/work/_temp/lab-logs/ubuntu-latest-x86_64__addr_layout.log
+[02:02:55.154] ======================================================================
+[02:02:55.154] linux-memory-lab :: addr_layout
+[02:02:55.154] ======================================================================
+[02:02:55.154] ======================================================================
+[02:02:55.154] ENVIRONMENT
+[02:02:55.154] ======================================================================
+[02:02:55.154] sysname      : Linux
+[02:02:55.154] release      : 7.0.0-1017-azure
+[02:02:55.154] version      : #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026
+[02:02:55.154] machine      : x86_64
+[02:02:55.154] nodename     : runnervm7aw5e
+[02:02:55.154] pid          : 2573
+[02:02:55.154] pointer bits : 64
+[02:02:55.154] page size    : 4096 bytes
+[02:02:55.154] compiler     : 13.3.0
+[02:02:55.154] target arch  : x86-64 (AMD64)
+[02:02:55.154] byte order   : little-endian
+[02:02:55.154] cpu          : model name	: AMD EPYC 7763 64-Core Processor
+[02:02:55.154] ======================================================================
+[02:02:55.154] CORE EXPERIMENT - C objects -> virtual addresses (README 九)
+[02:02:55.154] ======================================================================
+[02:02:55.154] PIE + ASLR randomize ABSOLUTE addresses, but the relative layout
+[02:02:55.154] (text/rodata/data/bss < heap < mmap < stack) is preserved.
+[02:02:55.154] Compare 'machine' and address widths across x86-64 and ARM64 logs.
+[02:02:55.154] 
+[02:02:55.154] OBJECT                     ADDRESS            VMA (from /proc/self/maps)
+[02:02:55.154]   global .data (g_data)  0x55784dc02010 -> 0x55784dc02000-0x55784dc03000 rw-p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   global .bss (g_bss)    0x55784dc02050 -> 0x55784dc02000-0x55784dc03000 rw-p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   static .bss (g_static) 0x55784dc0204c -> 0x55784dc02000-0x55784dc03000 rw-p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   .rodata literal        0x55784dc00008 -> 0x55784dc00000-0x55784dc01000 r--p /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   function .text         0x55784dbfe7d0 -> 0x55784dbfe000-0x55784dc00000 r-xp /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   libc printf .text      0x7f2cce460100 -> 0x7f2cce428000-0x7f2cce5b1000 r-xp /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:55.154]   local (stack)          0x7ffcaeb5cebc -> 0x7ffcaeb3e000-0x7ffcaeb60000 rw-p [stack]
+[02:02:55.154]   malloc heap            0x557857c412a0 -> 0x557857c41000-0x557857c62000 rw-p [heap]
+[02:02:55.154]   mmap anonymous         0x7f2cce629000 -> 0x7f2cce629000-0x7f2cce63c000 rw-p [anon]
+[02:02:55.154]   &ro_literal (stack ptr) 0x7ffcaeb5cec0 -> 0x7ffcaeb3e000-0x7ffcaeb60000 rw-p [stack]
+[02:02:55.154] 
+[02:02:55.154] live values: g_data=0x11223344 g_bss=0 g_static=0 stack=0x55
+[02:02:55.154] rodata='linux-memory-lab .rodata literal'
+[02:02:55.154] ======================================================================
+[02:02:55.154] THE THREE CHAINS (README 九)
+[02:02:55.154] ======================================================================
+[02:02:55.154] 1) C var -> GCC -> ELF .text/.data/.bss -> ELF loader -> VMA
+[02:02:55.154]    -> page table -> MMU -> physical RAM
+[02:02:55.154] 2) malloc() -> glibc allocator -> brk/mmap -> demand paging
+[02:02:55.154] 3) C pointer -> LOAD/STORE -> MMU -> page fault -> SIGSEGV on error
+[02:02:55.154] Not every page fault is a bug: demand paging and COW are normal.
+[02:02:55.154] ======================================================================
+[02:02:55.154] /proc/self/maps (complete VMA list)
+[02:02:55.154] ======================================================================
+[02:02:55.154]   55784dbfd000-55784dbfe000 r--p 00000000 08:01 9176292                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   55784dbfe000-55784dc00000 r-xp 00001000 08:01 9176292                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   55784dc00000-55784dc01000 r--p 00003000 08:01 9176292                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   55784dc01000-55784dc02000 r--p 00004000 08:01 9176292                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   55784dc02000-55784dc03000 rw-p 00005000 08:01 9176292                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/addr_layout
+[02:02:55.154]   557857c41000-557857c62000 rw-p 00000000 00:00 0                          [heap]
+[02:02:55.154]   7f2cce400000-7f2cce428000 r--p 00000000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:55.154]   7f2cce428000-7f2cce5b1000 r-xp 00028000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:55.154]   7f2cce5b1000-7f2cce600000 r--p 001b1000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:55.154]   7f2cce600000-7f2cce604000 r--p 001ff000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:55.154]   7f2cce604000-7f2cce606000 rw-p 00203000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:55.154]   7f2cce606000-7f2cce613000 rw-p 00000000 00:00 0 
+[02:02:55.154]   7f2cce629000-7f2cce63c000 rw-p 00000000 00:00 0 
+[02:02:55.154]   7f2cce646000-7f2cce648000 rw-p 00000000 00:00 0 
+[02:02:55.154]   7f2cce648000-7f2cce64c000 r--p 00000000 00:00 0                          [vvar]
+[02:02:55.154]   7f2cce64c000-7f2cce64e000 r--p 00000000 00:00 0                          [vvar_vclock]
+[02:02:55.154]   7f2cce64e000-7f2cce650000 r-xp 00000000 00:00 0                          [vdso]
+[02:02:55.154]   7f2cce650000-7f2cce651000 r--p 00000000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:55.154]   7f2cce651000-7f2cce67c000 r-xp 00001000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:55.154]   7f2cce67c000-7f2cce686000 r--p 0002c000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:55.154]   7f2cce686000-7f2cce688000 r--p 00036000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:55.154]   7f2cce688000-7f2cce68a000 rw-p 00038000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:55.154]   7ffcaeb3e000-7ffcaeb60000 rw-p 00000000 00:00 0                          [stack]
+[02:02:55.154]   ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
+[02:02:55.154] FINAL: PASS
+[02:02:55.154] log file: /home/runner/work/_temp/lab-logs/ubuntu-latest-x86_64__addr_layout.log

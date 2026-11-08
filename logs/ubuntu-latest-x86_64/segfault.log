@@ -1,61 +1,61 @@
-[01:58:25.483] ======================================================================
-[01:58:25.484] linux-memory-lab :: segfault
-[01:58:25.484] ======================================================================
-[01:58:25.484] ======================================================================
-[01:58:25.484] ENVIRONMENT
-[01:58:25.484] ======================================================================
-[01:58:25.484] sysname      : Linux
-[01:58:25.484] release      : 7.0.0-1017-azure
-[01:58:25.484] version      : #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026
-[01:58:25.484] machine      : x86_64
-[01:58:25.484] nodename     : runnervm7aw5e
-[01:58:25.484] pid          : 2294
-[01:58:25.484] pointer bits : 64
-[01:58:25.484] page size    : 4096 bytes
-[01:58:25.484] compiler     : 13.3.0
-[01:58:25.484] target arch  : x86-64 (AMD64)
-[01:58:25.484] byte order   : little-endian
-[01:58:25.484] cpu          : model name	: AMD EPYC 9V45 96-Core Processor
-[01:58:25.484] ======================================================================
-[01:58:25.484] CASE 1 - NULL pointer dereference (README 二)
-[01:58:25.484] ======================================================================
-[01:58:25.484] fault address 0x0 belongs to no VMA -> SIGSEGV
-[01:58:25.484] GDB: 'info proc mappings' shows which ranges ARE valid
-[01:58:25.544] child terminated by signal 11 (Segmentation fault)
-[01:58:25.544] => PASS: SIGSEGV observed
-[01:58:25.544] ======================================================================
-[01:58:25.544] CASE 2 - write to a read-only VMA (README 二 note)
-[01:58:25.544] ======================================================================
-[01:58:25.544] the address IS mapped but has no write permission -> also SIGSEGV
-[01:58:25.544] (page is mmap'ed with PROT_READ only, then written to)
-[01:58:25.602] child terminated by signal 11 (Segmentation fault)
-[01:58:25.602] => PASS: SIGSEGV observed
-[01:58:25.602] ======================================================================
-[01:58:25.602] valid VMAs of the parent process (/proc/self/maps)
-[01:58:25.602] ======================================================================
-[01:58:25.602]   56039c819000-56039c81a000 r--p 00000000 103:01 9176110                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[01:58:25.602]   56039c81a000-56039c81c000 r-xp 00001000 103:01 9176110                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[01:58:25.602]   56039c81c000-56039c81d000 r--p 00003000 103:01 9176110                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[01:58:25.602]   56039c81d000-56039c81e000 r--p 00003000 103:01 9176110                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[01:58:25.602]   56039c81e000-56039c81f000 rw-p 00004000 103:01 9176110                   /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[01:58:25.602]   5603b7b6c000-5603b7b8d000 rw-p 00000000 00:00 0                          [heap]
-[01:58:25.602]   7fda4c200000-7fda4c228000 r--p 00000000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.602]   7fda4c228000-7fda4c3b1000 r-xp 00028000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.602]   7fda4c3b1000-7fda4c400000 r--p 001b1000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.602]   7fda4c400000-7fda4c404000 r--p 001ff000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.602]   7fda4c404000-7fda4c406000 rw-p 00203000 103:01 6455                      /usr/lib/x86_64-linux-gnu/libc.so.6
-[01:58:25.602]   7fda4c406000-7fda4c413000 rw-p 00000000 00:00 0 
-[01:58:25.602]   7fda4c477000-7fda4c47a000 rw-p 00000000 00:00 0 
-[01:58:25.602]   7fda4c484000-7fda4c486000 rw-p 00000000 00:00 0 
-[01:58:25.602]   7fda4c486000-7fda4c48a000 r--p 00000000 00:00 0                          [vvar]
-[01:58:25.602]   7fda4c48a000-7fda4c48c000 r--p 00000000 00:00 0                          [vvar_vclock]
-[01:58:25.602]   7fda4c48c000-7fda4c48e000 r-xp 00000000 00:00 0                          [vdso]
-[01:58:25.602]   7fda4c48e000-7fda4c48f000 r--p 00000000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.602]   7fda4c48f000-7fda4c4ba000 r-xp 00001000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.602]   7fda4c4ba000-7fda4c4c4000 r--p 0002c000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.602]   7fda4c4c4000-7fda4c4c6000 r--p 00036000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.602]   7fda4c4c6000-7fda4c4c8000 rw-p 00038000 103:01 6452                      /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
-[01:58:25.602]   7ffd896eb000-7ffd8970d000 rw-p 00000000 00:00 0                          [stack]
-[01:58:25.602]   ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
-[01:58:25.602] FINAL: PASS
-[01:58:25.602] log file: /home/runner/work/_temp/lab-logs/ubuntu-latest-x86_64__segfault.log
+[02:02:54.641] ======================================================================
+[02:02:54.641] linux-memory-lab :: segfault
+[02:02:54.641] ======================================================================
+[02:02:54.641] ======================================================================
+[02:02:54.641] ENVIRONMENT
+[02:02:54.641] ======================================================================
+[02:02:54.641] sysname      : Linux
+[02:02:54.641] release      : 7.0.0-1017-azure
+[02:02:54.641] version      : #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026
+[02:02:54.641] machine      : x86_64
+[02:02:54.641] nodename     : runnervm7aw5e
+[02:02:54.641] pid          : 2519
+[02:02:54.641] pointer bits : 64
+[02:02:54.641] page size    : 4096 bytes
+[02:02:54.641] compiler     : 13.3.0
+[02:02:54.641] target arch  : x86-64 (AMD64)
+[02:02:54.641] byte order   : little-endian
+[02:02:54.641] cpu          : model name	: AMD EPYC 7763 64-Core Processor
+[02:02:54.641] ======================================================================
+[02:02:54.641] CASE 1 - NULL pointer dereference (README 二)
+[02:02:54.641] ======================================================================
+[02:02:54.641] fault address 0x0 belongs to no VMA -> SIGSEGV
+[02:02:54.641] GDB: 'info proc mappings' shows which ranges ARE valid
+[02:02:54.730] child terminated by signal 11 (Segmentation fault)
+[02:02:54.730] => PASS: SIGSEGV observed
+[02:02:54.730] ======================================================================
+[02:02:54.730] CASE 2 - write to a read-only VMA (README 二 note)
+[02:02:54.730] ======================================================================
+[02:02:54.730] the address IS mapped but has no write permission -> also SIGSEGV
+[02:02:54.730] (page is mmap'ed with PROT_READ only, then written to)
+[02:02:54.816] child terminated by signal 11 (Segmentation fault)
+[02:02:54.816] => PASS: SIGSEGV observed
+[02:02:54.816] ======================================================================
+[02:02:54.816] valid VMAs of the parent process (/proc/self/maps)
+[02:02:54.816] ======================================================================
+[02:02:54.817]   5602b5257000-5602b5258000 r--p 00000000 08:01 9176269                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:02:54.817]   5602b5258000-5602b525a000 r-xp 00001000 08:01 9176269                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:02:54.817]   5602b525a000-5602b525b000 r--p 00003000 08:01 9176269                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:02:54.817]   5602b525b000-5602b525c000 r--p 00003000 08:01 9176269                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:02:54.817]   5602b525c000-5602b525d000 rw-p 00004000 08:01 9176269                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:02:54.817]   5602c5648000-5602c5669000 rw-p 00000000 00:00 0                          [heap]
+[02:02:54.817]   7fdb2fa00000-7fdb2fa28000 r--p 00000000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:54.817]   7fdb2fa28000-7fdb2fbb1000 r-xp 00028000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:54.817]   7fdb2fbb1000-7fdb2fc00000 r--p 001b1000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:54.817]   7fdb2fc00000-7fdb2fc04000 r--p 001ff000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:54.817]   7fdb2fc04000-7fdb2fc06000 rw-p 00203000 08:01 6455                       /usr/lib/x86_64-linux-gnu/libc.so.6
+[02:02:54.817]   7fdb2fc06000-7fdb2fc13000 rw-p 00000000 00:00 0 
+[02:02:54.817]   7fdb2fcbe000-7fdb2fcc1000 rw-p 00000000 00:00 0 
+[02:02:54.817]   7fdb2fccb000-7fdb2fccd000 rw-p 00000000 00:00 0 
+[02:02:54.817]   7fdb2fccd000-7fdb2fcd1000 r--p 00000000 00:00 0                          [vvar]
+[02:02:54.817]   7fdb2fcd1000-7fdb2fcd3000 r--p 00000000 00:00 0                          [vvar_vclock]
+[02:02:54.817]   7fdb2fcd3000-7fdb2fcd5000 r-xp 00000000 00:00 0                          [vdso]
+[02:02:54.817]   7fdb2fcd5000-7fdb2fcd6000 r--p 00000000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:54.817]   7fdb2fcd6000-7fdb2fd01000 r-xp 00001000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:54.817]   7fdb2fd01000-7fdb2fd0b000 r--p 0002c000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:54.817]   7fdb2fd0b000-7fdb2fd0d000 r--p 00036000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:54.817]   7fdb2fd0d000-7fdb2fd0f000 rw-p 00038000 08:01 6452                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+[02:02:54.817]   7ffc9ca48000-7ffc9ca6a000 rw-p 00000000 00:00 0                          [stack]
+[02:02:54.817]   ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
+[02:02:54.817] FINAL: PASS
+[02:02:54.817] log file: /home/runner/work/_temp/lab-logs/ubuntu-latest-x86_64__segfault.log

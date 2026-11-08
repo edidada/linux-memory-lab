@@ -1,10 +1,10 @@
 runner        : ubuntu-22.04
 arch          : x86-64
 slug          : ubuntu-22.04-x86_64
-commit        : 1b8c2d7964323d6ab93d60003432ac7a893f290f
+commit        : bdb314bb31bf84a90b148b1717af5280a24a0692
 kernel        : Linux runnervmlby3q 6.8.0-1070-azure #78~22.04.1-Ubuntu SMP Thu Sep 24 18:46:45 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
-cpu           : model name	: AMD EPYC 7763 64-Core Processor
+cpu           : model name	: AMD EPYC 9V45 96-Core Processor
 gcc           : 11.4.0
 cmake         : cmake version 3.31.6
 glibc         : ldd (Ubuntu GLIBC 2.35-0ubuntu3.15) 2.35
-generated_utc : 2026-11-08T01:58:26Z
+generated_utc : 2026-11-08T02:02:43Z
