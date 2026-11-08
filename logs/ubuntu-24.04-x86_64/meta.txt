@@ -1,10 +1,10 @@
 runner        : ubuntu-24.04
 arch          : x86-64
 slug          : ubuntu-24.04-x86_64
-commit        : bdb314bb31bf84a90b148b1717af5280a24a0692
+commit        : 9dc06c43614a6b69df938fa33c5bd5561ebe48ea
 kernel        : Linux runnervm7aw5e 7.0.0-1017-azure #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 18:46:57 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
-cpu           : model name	: AMD EPYC 7763 64-Core Processor
+cpu           : model name	: AMD EPYC 9V45 96-Core Processor
 gcc           : 13.3.0
 cmake         : cmake version 3.31.6
 glibc         : ldd (Ubuntu GLIBC 2.39-0ubuntu8.9) 2.39
-generated_utc : 2026-11-08T02:02:46Z
+generated_utc : 2026-11-08T02:07:48Z

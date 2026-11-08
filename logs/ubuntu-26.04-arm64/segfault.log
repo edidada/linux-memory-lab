@@ -1,55 +1,55 @@
-[02:02:48.249] ======================================================================
-[02:02:48.249] linux-memory-lab :: segfault
-[02:02:48.249] ======================================================================
-[02:02:48.249] ======================================================================
-[02:02:48.249] ENVIRONMENT
-[02:02:48.249] ======================================================================
-[02:02:48.249] sysname      : Linux
-[02:02:48.249] release      : 7.0.0-1019-azure
-[02:02:48.249] version      : #20-Ubuntu SMP PREEMPT Mon Oct 19 23:06:15 UTC 2026
-[02:02:48.249] machine      : aarch64
-[02:02:48.249] nodename     : runnervm6q1hd
-[02:02:48.249] pid          : 2499
-[02:02:48.249] pointer bits : 64
-[02:02:48.249] page size    : 4096 bytes
-[02:02:48.249] compiler     : 15.2.0
-[02:02:48.249] target arch  : AArch64 (ARM64)
-[02:02:48.249] byte order   : little-endian
-[02:02:48.249] cpu          : CPU part	: 0xd49
-[02:02:48.249] ======================================================================
-[02:02:48.249] CASE 1 - NULL pointer dereference (README 二)
-[02:02:48.249] ======================================================================
-[02:02:48.249] fault address 0x0 belongs to no VMA -> SIGSEGV
-[02:02:48.249] GDB: 'info proc mappings' shows which ranges ARE valid
-[02:02:48.316] child terminated by signal 11 (Segmentation fault)
-[02:02:48.316] => PASS: SIGSEGV observed
-[02:02:48.316] ======================================================================
-[02:02:48.316] CASE 2 - write to a read-only VMA (README 二 note)
-[02:02:48.316] ======================================================================
-[02:02:48.316] the address IS mapped but has no write permission -> also SIGSEGV
-[02:02:48.316] (page is mmap'ed with PROT_READ only, then written to)
-[02:02:48.360] child terminated by signal 11 (Segmentation fault)
-[02:02:48.360] => PASS: SIGSEGV observed
-[02:02:48.360] ======================================================================
-[02:02:48.360] valid VMAs of the parent process (/proc/self/maps)
-[02:02:48.360] ======================================================================
-[02:02:48.360]   c4dbd1060000-c4dbd1064000 r-xp 00000000 08:01 5517216                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[02:02:48.360]   c4dbd107f000-c4dbd1080000 r--p 0000f000 08:01 5517216                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[02:02:48.360]   c4dbd1080000-c4dbd1081000 rw-p 00010000 08:01 5517216                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
-[02:02:48.360]   c4dbf3d9e000-c4dbf3e00000 rw-p 00000000 00:00 0                          [heap]
-[02:02:48.360]   f0048e160000-f0048e309000 r-xp 00000000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
-[02:02:48.360]   f0048e309000-f0048e31d000 ---p 001a9000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
-[02:02:48.360]   f0048e31d000-f0048e320000 r--p 001ad000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
-[02:02:48.360]   f0048e320000-f0048e322000 rw-p 001b0000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
-[02:02:48.360]   f0048e322000-f0048e32e000 rw-p 00000000 00:00 0 
-[02:02:48.360]   f0048e33c000-f0048e366000 r-xp 00000000 08:01 5337                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
-[02:02:48.360]   f0048e366000-f0048e368000 rw-p 00000000 00:00 0 
-[02:02:48.360]   f0048e372000-f0048e374000 rw-p 00000000 00:00 0 
-[02:02:48.360]   f0048e374000-f0048e378000 r--p 00000000 00:00 0                          [vvar]
-[02:02:48.360]   f0048e378000-f0048e37a000 r-xp 00000000 00:00 0                          [vdso]
-[02:02:48.360]   f0048e37a000-f0048e37c000 r--p 0002e000 08:01 5337                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
-[02:02:48.360]   f0048e37c000-f0048e37d000 rw-p 00030000 08:01 5337                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
-[02:02:48.360]   f0048e37d000-f0048e37e000 rw-p 00000000 00:00 0 
-[02:02:48.360]   ffffe84ac000-ffffe84ce000 rw-p 00000000 00:00 0                          [stack]
-[02:02:48.360] FINAL: PASS
-[02:02:48.360] log file: /home/runner/work/_temp/lab-logs/ubuntu-26.04-arm64__segfault.log
+[02:07:53.106] ======================================================================
+[02:07:53.106] linux-memory-lab :: segfault
+[02:07:53.106] ======================================================================
+[02:07:53.106] ======================================================================
+[02:07:53.106] ENVIRONMENT
+[02:07:53.106] ======================================================================
+[02:07:53.106] sysname      : Linux
+[02:07:53.106] release      : 7.0.0-1019-azure
+[02:07:53.106] version      : #20-Ubuntu SMP PREEMPT Mon Oct 19 23:06:15 UTC 2026
+[02:07:53.106] machine      : aarch64
+[02:07:53.106] nodename     : runnervm6q1hd
+[02:07:53.106] pid          : 2542
+[02:07:53.106] pointer bits : 64
+[02:07:53.106] page size    : 4096 bytes
+[02:07:53.106] compiler     : 15.2.0
+[02:07:53.106] target arch  : AArch64 (ARM64)
+[02:07:53.106] byte order   : little-endian
+[02:07:53.106] cpu          : CPU part	: 0xd49
+[02:07:53.106] ======================================================================
+[02:07:53.106] CASE 1 - NULL pointer dereference (README 二)
+[02:07:53.106] ======================================================================
+[02:07:53.106] fault address 0x0 belongs to no VMA -> SIGSEGV
+[02:07:53.106] GDB: 'info proc mappings' shows which ranges ARE valid
+[02:07:53.177] child terminated by signal 11 (Segmentation fault)
+[02:07:53.177] => PASS: SIGSEGV observed
+[02:07:53.177] ======================================================================
+[02:07:53.177] CASE 2 - write to a read-only VMA (README 二 note)
+[02:07:53.177] ======================================================================
+[02:07:53.177] the address IS mapped but has no write permission -> also SIGSEGV
+[02:07:53.177] (page is mmap'ed with PROT_READ only, then written to)
+[02:07:53.221] child terminated by signal 11 (Segmentation fault)
+[02:07:53.221] => PASS: SIGSEGV observed
+[02:07:53.221] ======================================================================
+[02:07:53.221] valid VMAs of the parent process (/proc/self/maps)
+[02:07:53.221] ======================================================================
+[02:07:53.221]   aedecfdc0000-aedecfdc4000 r-xp 00000000 08:01 5517221                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:07:53.221]   aedecfddf000-aedecfde0000 r--p 0000f000 08:01 5517221                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:07:53.221]   aedecfde0000-aedecfde1000 rw-p 00010000 08:01 5517221                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[02:07:53.221]   aedee93d5000-aedee9400000 rw-p 00000000 00:00 0                          [heap]
+[02:07:53.221]   ebc4e1d40000-ebc4e1ee9000 r-xp 00000000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[02:07:53.221]   ebc4e1ee9000-ebc4e1efd000 ---p 001a9000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[02:07:53.221]   ebc4e1efd000-ebc4e1f00000 r--p 001ad000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[02:07:53.221]   ebc4e1f00000-ebc4e1f02000 rw-p 001b0000 08:01 5340                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[02:07:53.221]   ebc4e1f02000-ebc4e1f0e000 rw-p 00000000 00:00 0 
+[02:07:53.221]   ebc4e1f12000-ebc4e1f3c000 r-xp 00000000 08:01 5337                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+[02:07:53.221]   ebc4e1f3c000-ebc4e1f3e000 rw-p 00000000 00:00 0 
+[02:07:53.221]   ebc4e1f48000-ebc4e1f4a000 rw-p 00000000 00:00 0 
+[02:07:53.221]   ebc4e1f4a000-ebc4e1f4e000 r--p 00000000 00:00 0                          [vvar]
+[02:07:53.221]   ebc4e1f4e000-ebc4e1f50000 r-xp 00000000 00:00 0                          [vdso]
+[02:07:53.221]   ebc4e1f50000-ebc4e1f52000 r--p 0002e000 08:01 5337                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+[02:07:53.221]   ebc4e1f52000-ebc4e1f53000 rw-p 00030000 08:01 5337                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+[02:07:53.221]   ebc4e1f53000-ebc4e1f54000 rw-p 00000000 00:00 0 
+[02:07:53.221]   ffffd4d81000-ffffd4da3000 rw-p 00000000 00:00 0                          [stack]
+[02:07:53.221] FINAL: PASS
+[02:07:53.221] log file: /home/runner/work/_temp/lab-logs/ubuntu-26.04-arm64__segfault.log

@@ -1,10 +1,10 @@
 runner        : ubuntu-24.04-arm
 arch          : ARM64
 slug          : ubuntu-24.04-arm64
-commit        : bdb314bb31bf84a90b148b1717af5280a24a0692
+commit        : 9dc06c43614a6b69df938fa33c5bd5561ebe48ea
 kernel        : Linux runnervmkb2gk 7.0.0-1017-azure #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 19:06:39 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
 cpu           : CPU part	: 0xd49
 gcc           : 13.3.0
 cmake         : cmake version 3.31.6
 glibc         : ldd (Ubuntu GLIBC 2.39-0ubuntu8.9) 2.39
-generated_utc : 2026-11-08T02:02:46Z
+generated_utc : 2026-11-08T02:07:52Z
