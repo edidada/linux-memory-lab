@@ -84,8 +84,8 @@ jobs:
           echo "===== cpu ====="
           grep -m1 -E 'model name|Hardware|Processor|CPU part' /proc/cpuinfo || true
           echo "===== compilers ====="
-          gcc --version   | head -1
-          cmake --version | head -1
+          gcc --version   | sed -n '1p'
+          cmake --version | sed -n '1p'
 
       - name: Configure (CMake)
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
@@ -118,8 +118,8 @@ jobs:
             echo "kernel        : $(uname -a)"
             echo "cpu           : $(grep -m1 -E 'model name|Hardware|Processor|CPU part' /proc/cpuinfo || true)"
             echo "gcc           : $(gcc -dumpfullversion 2>/dev/null || gcc -dumpversion)"
-            echo "cmake         : $(cmake --version | head -1)"
-            echo "glibc         : $(ldd --version | head -1)"
+            echo "cmake         : $(cmake --version | sed -n '1p')"
+            echo "glibc         : $(ldd --version | sed -n '1p')"
             echo "generated_utc : $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           } > "$meta"
 
