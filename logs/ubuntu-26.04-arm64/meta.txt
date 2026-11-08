@@ -1,0 +1,10 @@
+runner        : ubuntu-26.04-arm
+arch          : ARM64
+slug          : ubuntu-26.04-arm64
+commit        : 1b8c2d7964323d6ab93d60003432ac7a893f290f
+kernel        : Linux runnervm6q1hd 7.0.0-1019-azure #20-Ubuntu SMP PREEMPT Mon Oct 19 23:06:15 UTC 2026 aarch64 GNU/Linux
+cpu           : CPU part	: 0xd49
+gcc           : 15.2.0
+cmake         : cmake version 4.4.5
+glibc         : ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43
+generated_utc : 2026-11-08T01:58:39Z

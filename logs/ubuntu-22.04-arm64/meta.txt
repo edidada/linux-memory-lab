@@ -1,0 +1,10 @@
+runner        : ubuntu-22.04-arm
+arch          : ARM64
+slug          : ubuntu-22.04-arm64
+commit        : 1b8c2d7964323d6ab93d60003432ac7a893f290f
+kernel        : Linux runnervmc1ekl 6.8.0-1070-azure #78~22.04.1-Ubuntu SMP Thu Sep 24 18:58:03 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+cpu           : CPU part	: 0xd49
+gcc           : 11.4.0
+cmake         : cmake version 3.31.6
+glibc         : ldd (Ubuntu GLIBC 2.35-0ubuntu3.15) 2.35
+generated_utc : 2026-11-08T01:58:33Z

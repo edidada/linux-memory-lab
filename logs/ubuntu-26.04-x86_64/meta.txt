@@ -1,0 +1,10 @@
+runner        : ubuntu-26.04
+arch          : x86-64
+slug          : ubuntu-26.04-x86_64
+commit        : 1b8c2d7964323d6ab93d60003432ac7a893f290f
+kernel        : Linux runnervmwuk1x 7.0.0-1019-azure #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026 x86_64 GNU/Linux
+cpu           : model name	: AMD EPYC 7763 64-Core Processor
+gcc           : 15.2.0
+cmake         : cmake version 4.4.5
+glibc         : ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43
+generated_utc : 2026-11-08T01:58:27Z

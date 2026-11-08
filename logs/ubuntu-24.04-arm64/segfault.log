@@ -1,0 +1,53 @@
+[01:58:27.416] ======================================================================
+[01:58:27.416] linux-memory-lab :: segfault
+[01:58:27.416] ======================================================================
+[01:58:27.416] ======================================================================
+[01:58:27.416] ENVIRONMENT
+[01:58:27.416] ======================================================================
+[01:58:27.416] sysname      : Linux
+[01:58:27.416] release      : 7.0.0-1017-azure
+[01:58:27.416] version      : #17~24.04.1-Ubuntu SMP PREEMPT Thu Sep 24 19:06:39 UTC 2026
+[01:58:27.416] machine      : aarch64
+[01:58:27.416] nodename     : runnervmkb2gk
+[01:58:27.416] pid          : 2420
+[01:58:27.416] pointer bits : 64
+[01:58:27.416] page size    : 4096 bytes
+[01:58:27.416] compiler     : 13.3.0
+[01:58:27.416] target arch  : AArch64 (ARM64)
+[01:58:27.416] byte order   : little-endian
+[01:58:27.416] cpu          : CPU part	: 0xd49
+[01:58:27.416] ======================================================================
+[01:58:27.416] CASE 1 - NULL pointer dereference (README 二)
+[01:58:27.416] ======================================================================
+[01:58:27.416] fault address 0x0 belongs to no VMA -> SIGSEGV
+[01:58:27.416] GDB: 'info proc mappings' shows which ranges ARE valid
+[01:58:27.487] child terminated by signal 11 (Segmentation fault)
+[01:58:27.487] => PASS: SIGSEGV observed
+[01:58:27.487] ======================================================================
+[01:58:27.487] CASE 2 - write to a read-only VMA (README 二 note)
+[01:58:27.487] ======================================================================
+[01:58:27.487] the address IS mapped but has no write permission -> also SIGSEGV
+[01:58:27.487] (page is mmap'ed with PROT_READ only, then written to)
+[01:58:27.541] child terminated by signal 11 (Segmentation fault)
+[01:58:27.541] => PASS: SIGSEGV observed
+[01:58:27.541] ======================================================================
+[01:58:27.541] valid VMAs of the parent process (/proc/self/maps)
+[01:58:27.541] ======================================================================
+[01:58:27.541]   aad1b1c10000-aad1b1c14000 r-xp 00000000 08:01 6032013                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[01:58:27.541]   aad1b1c2f000-aad1b1c30000 r--p 0000f000 08:01 6032013                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[01:58:27.541]   aad1b1c30000-aad1b1c31000 rw-p 00010000 08:01 6032013                    /home/runner/work/linux-memory-lab/linux-memory-lab/build/src/segfault
+[01:58:27.541]   aad1e04e3000-aad1e0504000 rw-p 00000000 00:00 0                          [heap]
+[01:58:27.541]   fff813010000-fff8131aa000 r-xp 00000000 08:01 6411                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[01:58:27.541]   fff8131aa000-fff8131bd000 ---p 0019a000 08:01 6411                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[01:58:27.541]   fff8131bd000-fff8131c0000 r--p 0019d000 08:01 6411                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[01:58:27.541]   fff8131c0000-fff8131c2000 rw-p 001a0000 08:01 6411                       /usr/lib/aarch64-linux-gnu/libc.so.6
+[01:58:27.541]   fff8131c2000-fff8131ce000 rw-p 00000000 00:00 0 
+[01:58:27.541]   fff8131d7000-fff8131fe000 r-xp 00000000 08:01 6408                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+[01:58:27.541]   fff81320d000-fff81320f000 rw-p 00000000 00:00 0 
+[01:58:27.541]   fff81320f000-fff813213000 r--p 00000000 00:00 0                          [vvar]
+[01:58:27.541]   fff813213000-fff813215000 r-xp 00000000 00:00 0                          [vdso]
+[01:58:27.541]   fff813215000-fff813217000 r--p 0002e000 08:01 6408                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+[01:58:27.541]   fff813217000-fff813219000 rw-p 00030000 08:01 6408                       /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1
+[01:58:27.541]   ffffccf53000-ffffccf75000 rw-p 00000000 00:00 0                          [stack]
+[01:58:27.541] FINAL: PASS
+[01:58:27.541] log file: /home/runner/work/_temp/lab-logs/ubuntu-24.04-arm64__segfault.log
