@@ -1,0 +1,8 @@
+# Keep every text file LF in the repository and in working trees.
+# Critical for the workflow's `run:` shell blocks and for CMake/C sources
+# that are consumed by Linux runners.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.gz   binary

@@ -1,0 +1,187 @@
+name: Linux Memory Lab CI
+
+# The laboratory programs are Linux-only; all compilation / execution happens
+# here on GitHub-hosted runners. The local workstation only holds source.
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'logs/**'          # log commits must never re-trigger CI
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Required so the publish-logs job can push generated logs back to the repo.
+permissions:
+  contents: write
+  actions: read
+
+# Serialize runs on a ref: two overlapping runs must not race on git push.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # ----------------------------------------------------------------------
+  # Build + run every demonstration on every GitHub-supported Linux CPU type
+  # (x86-64 and ARM64) and OS generation (26.04 / 24.04 / 22.04 / latest).
+  # ----------------------------------------------------------------------
+  build-and-test:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: 'Ubuntu 26.04 / x86-64'
+            slug: 'ubuntu-26.04-x86_64'
+            runner: ubuntu-26.04
+            arch: x86-64
+            experimental: false
+          - name: 'Ubuntu 26.04 / ARM64'
+            slug: 'ubuntu-26.04-arm64'
+            runner: ubuntu-26.04-arm
+            arch: ARM64
+            experimental: false
+          - name: 'Ubuntu 24.04 / x86-64'
+            slug: 'ubuntu-24.04-x86_64'
+            runner: ubuntu-24.04
+            arch: x86-64
+            experimental: false
+          - name: 'Ubuntu 24.04 / ARM64'
+            slug: 'ubuntu-24.04-arm64'
+            runner: ubuntu-24.04-arm
+            arch: ARM64
+            experimental: false
+          - name: 'ubuntu-latest / x86-64'
+            slug: 'ubuntu-latest-x86_64'
+            runner: ubuntu-latest
+            arch: x86-64
+            experimental: false
+          # 22.04 is deprecated (retires 2027-04) - keep as best-effort.
+          - name: 'Ubuntu 22.04 / x86-64 (EOL)'
+            slug: 'ubuntu-22.04-x86_64'
+            runner: ubuntu-22.04
+            arch: x86-64
+            experimental: true
+          - name: 'Ubuntu 22.04 / ARM64 (EOL)'
+            slug: 'ubuntu-22.04-arm64'
+            runner: ubuntu-22.04-arm
+            arch: ARM64
+            experimental: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Toolchain / CPU identification
+        run: |
+          echo "===== runner ====="
+          echo "label : ${{ matrix.runner }}"
+          echo "arch  : ${{ matrix.arch }}"
+          uname -srm
+          echo "===== cpu ====="
+          grep -m1 -E 'model name|Hardware|Processor|CPU part' /proc/cpuinfo || true
+          echo "===== compilers ====="
+          gcc --version   | head -1
+          cmake --version | head -1
+
+      - name: Configure (CMake)
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --parallel 2
+
+      - name: Run all programs (CTest) and capture their logs
+        env:
+          LAB_LOG_DIR: ${{ runner.temp }}/lab-logs
+          LAB_LOG_PREFIX: "${{ matrix.slug }}__"
+        run: |
+          rm -rf "$LAB_LOG_DIR"
+          mkdir -p "$LAB_LOG_DIR"
+          cd build
+          ctest --output-on-failure --timeout 120
+
+      - name: Per-runner metadata
+        if: success()
+        env:
+          LAB_LOG_DIR: ${{ runner.temp }}/lab-logs
+          LAB_LOG_PREFIX: "${{ matrix.slug }}__"
+        run: |
+          meta="$LAB_LOG_DIR/${LAB_LOG_PREFIX}meta.txt"
+          {
+            echo "runner        : ${{ matrix.runner }}"
+            echo "arch          : ${{ matrix.arch }}"
+            echo "slug          : ${{ matrix.slug }}"
+            echo "commit        : ${{ github.sha }}"
+            echo "kernel        : $(uname -a)"
+            echo "cpu           : $(grep -m1 -E 'model name|Hardware|Processor|CPU part' /proc/cpuinfo || true)"
+            echo "gcc           : $(gcc -dumpfullversion 2>/dev/null || gcc -dumpversion)"
+            echo "cmake         : $(cmake --version | head -1)"
+            echo "glibc         : $(ldd --version | head -1)"
+            echo "generated_utc : $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > "$meta"
+
+      - name: Upload program logs
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: logs-${{ matrix.slug }}
+          path: ${{ runner.temp }}/lab-logs/
+          if-no-files-found: error
+          retention-days: 30
+          include-hidden-files: false
+
+  # ----------------------------------------------------------------------
+  # Aggregate every runner's logs and commit them into logs/ so the program
+  # output is tracked by git and visible on GitHub. Single job => no push race.
+  # '[skip ci]' + GITHUB_TOKEN pushes do not re-trigger this workflow.
+  # ----------------------------------------------------------------------
+  publish-logs:
+    name: Commit program logs to git
+    needs: build-and-test
+    if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Download all runner logs
+        uses: actions/download-artifact@v8
+        with:
+          pattern: logs-*
+          path: logs
+          merge-multiple: true
+
+      - name: Arrange logs into per-runner directories
+        run: |
+          cd logs
+          shopt -s nullglob
+          mapfile -t files < <(find . -type f -name '*__*')
+          for f in "${files[@]}"; do
+            name="$(basename "$f")"       # e.g. ubuntu-26.04-x86_64__segfault.log
+            slug="${name%%__*}"           # split on the FIRST "__"
+            rest="${name#*__}"
+            mkdir -p "$slug"
+            mv -f "$f" "$slug/$rest"
+          done
+          echo "===== tracked log tree ====="
+          find . -type f | sort
+
+      - name: Commit and push logs
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- logs && \
+             [ -z "$(git ls-files --others --exclude-standard logs)" ]; then
+            echo "No log changes to publish."
+            exit 0
+          fi
+          git add logs
+          git commit -m "ci: publish program logs [skip ci]"
+          git pull --rebase origin "${{ github.ref_name }}" || true
+          git push origin "HEAD:${{ github.ref_name }}"
