@@ -21,9 +21,10 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Build type" FORCE)
 endif()
 
-option(LAB_BUILD_DEMOS  "Build the demonstration programs" ON)
-option(LAB_ENABLE_ASAN  "Build with AddressSanitizer" OFF)
-option(LAB_ENABLE_UBSAN "Build with UndefinedBehaviorSanitizer" OFF)
+option(LAB_BUILD_DEMOS    "Build the demonstration programs" ON)
+option(LAB_BUILD_EXAMPLES "Build the standalone teaching examples (needs lab_common)" ON)
+option(LAB_ENABLE_ASAN    "Build with AddressSanitizer" OFF)
+option(LAB_ENABLE_UBSAN   "Build with UndefinedBehaviorSanitizer" OFF)
 
 # Warnings + flags that keep the deliberate faults real even at -O2/-O3.
 add_library(lab_warnings INTERFACE)
@@ -46,4 +47,10 @@ enable_testing()
 
 if(LAB_BUILD_DEMOS)
     add_subdirectory(src)
+    if(LAB_BUILD_EXAMPLES)
+        add_subdirectory(examples)
+    endif()
+elseif(LAB_BUILD_EXAMPLES)
+    message(STATUS
+        "LAB_BUILD_EXAMPLES needs lab_common from LAB_BUILD_DEMOS; examples skipped.")
 endif()
