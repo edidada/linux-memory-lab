@@ -1,29 +1,29 @@
-[02:07:49.944] ======================================================================
-[02:07:49.944] linux-memory-lab :: mmap_sigbus
-[02:07:49.944] ======================================================================
-[02:07:49.944] ======================================================================
-[02:07:49.944] ENVIRONMENT
-[02:07:49.944] ======================================================================
-[02:07:49.944] sysname      : Linux
-[02:07:49.944] release      : 6.8.0-1070-azure
-[02:07:49.944] version      : #78~22.04.1-Ubuntu SMP Thu Sep 24 18:46:45 UTC 2026
-[02:07:49.944] machine      : x86_64
-[02:07:49.944] nodename     : runnervmlby3q
-[02:07:49.944] pid          : 2364
-[02:07:49.944] pointer bits : 64
-[02:07:49.944] page size    : 4096 bytes
-[02:07:49.944] compiler     : 11.4.0
-[02:07:49.944] target arch  : x86-64 (AMD64)
-[02:07:49.944] byte order   : little-endian
-[02:07:49.944] cpu          : model name	: AMD EPYC 9V74 80-Core Processor
-[02:07:49.944] ======================================================================
-[02:07:49.944] CASE - mmap + ftruncate -> SIGBUS (README 六)
-[02:07:49.944] ======================================================================
-[02:07:49.944]   strace -f -e trace=mmap,munmap,mremap,ftruncate ./mmap_sigbus
-[02:07:49.944]   GDB: handle SIGBUS stop print / run / bt / info proc mappings
-[02:07:49.944] A mapped page beyond the truncated file's EOF raises SIGBUS.
-[02:07:49.944] Typical sources: mmap'ed DBs, mmap'ed logs, shm IPC, ftruncate.
-[02:07:50.020] child terminated by signal 7 (Bus error)
-[02:07:50.020] => Bus error
-[02:07:50.020] FINAL: PASS
-[02:07:50.020] log file: /home/runner/work/_temp/lab-logs/ubuntu-22.04-x86_64__mmap_sigbus.log
+[11:34:47.764] ======================================================================
+[11:34:47.764] linux-memory-lab :: mmap_sigbus
+[11:34:47.764] ======================================================================
+[11:34:47.764] ======================================================================
+[11:34:47.764] ENVIRONMENT
+[11:34:47.764] ======================================================================
+[11:34:47.764] sysname      : Linux
+[11:34:47.764] release      : 6.8.0-1070-azure
+[11:34:47.764] version      : #78~22.04.1-Ubuntu SMP Thu Sep 24 18:46:45 UTC 2026
+[11:34:47.764] machine      : x86_64
+[11:34:47.764] nodename     : runnervmy75tu
+[11:34:47.764] pid          : 2251
+[11:34:47.764] pointer bits : 64
+[11:34:47.764] page size    : 4096 bytes
+[11:34:47.764] compiler     : 11.4.0
+[11:34:47.764] target arch  : x86-64 (AMD64)
+[11:34:47.764] byte order   : little-endian
+[11:34:47.764] cpu          : model name	: AMD EPYC 9V74 80-Core Processor
+[11:34:47.764] ======================================================================
+[11:34:47.764] CASE - mmap + ftruncate -> SIGBUS (README 六)
+[11:34:47.764] ======================================================================
+[11:34:47.764]   strace -f -e trace=mmap,munmap,mremap,ftruncate ./mmap_sigbus
+[11:34:47.764]   GDB: handle SIGBUS stop print / run / bt / info proc mappings
+[11:34:47.764] A mapped page beyond the truncated file's EOF raises SIGBUS.
+[11:34:47.764] Typical sources: mmap'ed DBs, mmap'ed logs, shm IPC, ftruncate.
+[11:34:47.841] child terminated by signal 7 (Bus error)
+[11:34:47.841] => Bus error
+[11:34:47.841] FINAL: PASS
+[11:34:47.841] log file: /home/runner/work/_temp/lab-logs/ubuntu-22.04-x86_64__mmap_sigbus.log

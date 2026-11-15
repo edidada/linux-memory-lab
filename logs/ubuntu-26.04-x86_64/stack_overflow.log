@@ -1,29 +1,29 @@
-[02:07:49.739] ======================================================================
-[02:07:49.739] linux-memory-lab :: stack_overflow
-[02:07:49.739] ======================================================================
-[02:07:49.739] ======================================================================
-[02:07:49.739] ENVIRONMENT
-[02:07:49.739] ======================================================================
-[02:07:49.739] sysname      : Linux
-[02:07:49.739] release      : 7.0.0-1019-azure
-[02:07:49.739] version      : #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
-[02:07:49.739] machine      : x86_64
-[02:07:49.739] nodename     : runnervmwuk1x
-[02:07:49.739] pid          : 2615
-[02:07:49.739] pointer bits : 64
-[02:07:49.739] page size    : 4096 bytes
-[02:07:49.739] compiler     : 15.2.0
-[02:07:49.739] target arch  : x86-64 (AMD64)
-[02:07:49.739] byte order   : little-endian
-[02:07:49.739] cpu          : model name	: AMD EPYC 7763 64-Core Processor
-[02:07:49.740] ======================================================================
-[02:07:49.740] CASE - stack overflow via recursion (README 四)
-[02:07:49.740] ======================================================================
-[02:07:49.740] each frame consumes ~8192 bytes of the stack VMA
-[02:07:49.740] child lowers RLIMIT_STACK to 1 MiB for a fast bounded crash
-[02:07:49.740] GDB: 'bt 20' shows repeated recursive() frames, rsp near the
-[02:07:49.740]      stack VMA boundary; 'ulimit -s' reveals the stack limit.
-[02:07:49.823] child terminated by signal 11 (Segmentation fault)
-[02:07:49.823] => recursion exhausted the stack mapping: Segmentation fault
-[02:07:49.823] FINAL: PASS
-[02:07:49.823] log file: /home/runner/work/_temp/lab-logs/ubuntu-26.04-x86_64__stack_overflow.log
+[11:35:09.170] ======================================================================
+[11:35:09.170] linux-memory-lab :: stack_overflow
+[11:35:09.170] ======================================================================
+[11:35:09.170] ======================================================================
+[11:35:09.170] ENVIRONMENT
+[11:35:09.170] ======================================================================
+[11:35:09.170] sysname      : Linux
+[11:35:09.170] release      : 7.0.0-1016-aws
+[11:35:09.170] version      : #17-Ubuntu SMP PREEMPT Mon Oct 19 17:36:33 UTC 2026
+[11:35:09.170] machine      : x86_64
+[11:35:09.170] nodename     : ip-10-0-142-244
+[11:35:09.170] pid          : 2733
+[11:35:09.170] pointer bits : 64
+[11:35:09.170] page size    : 4096 bytes
+[11:35:09.170] compiler     : 15.2.0
+[11:35:09.170] target arch  : x86-64 (AMD64)
+[11:35:09.170] byte order   : little-endian
+[11:35:09.170] cpu          : model name	: Intel(R) Xeon(R) 6975P-C
+[11:35:09.170] ======================================================================
+[11:35:09.170] CASE - stack overflow via recursion (README 四)
+[11:35:09.170] ======================================================================
+[11:35:09.170] each frame consumes ~8192 bytes of the stack VMA
+[11:35:09.170] child lowers RLIMIT_STACK to 1 MiB for a fast bounded crash
+[11:35:09.170] GDB: 'bt 20' shows repeated recursive() frames, rsp near the
+[11:35:09.170]      stack VMA boundary; 'ulimit -s' reveals the stack limit.
+[11:35:09.203] child terminated by signal 11 (Segmentation fault)
+[11:35:09.204] => recursion exhausted the stack mapping: Segmentation fault
+[11:35:09.204] FINAL: PASS
+[11:35:09.204] log file: /home/runner/work/_temp/lab-logs/ubuntu-26.04-x86_64__stack_overflow.log

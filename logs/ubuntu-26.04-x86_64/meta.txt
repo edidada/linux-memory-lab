@@ -1,10 +1,10 @@
 runner        : ubuntu-26.04
 arch          : x86-64
 slug          : ubuntu-26.04-x86_64
-commit        : 9dc06c43614a6b69df938fa33c5bd5561ebe48ea
-kernel        : Linux runnervmwuk1x 7.0.0-1019-azure #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026 x86_64 GNU/Linux
-cpu           : model name	: AMD EPYC 7763 64-Core Processor
+commit        : 9dfba556e2533512df652cf1c872b8e1a1da7c7d
+kernel        : Linux ip-10-0-142-244 7.0.0-1016-aws #17-Ubuntu SMP PREEMPT Mon Oct 19 17:36:33 UTC 2026 x86_64 GNU/Linux
+cpu           : model name	: Intel(R) Xeon(R) 6975P-C
 gcc           : 15.2.0
 cmake         : cmake version 4.4.5
 glibc         : ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43
-generated_utc : 2026-11-08T02:07:50Z
+generated_utc : 2026-11-15T11:35:09Z

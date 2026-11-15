@@ -1,36 +1,36 @@
-[02:07:49.737] ======================================================================
-[02:07:49.737] linux-memory-lab :: uaf
-[02:07:49.737] ======================================================================
-[02:07:49.737] ======================================================================
-[02:07:49.737] ENVIRONMENT
-[02:07:49.737] ======================================================================
-[02:07:49.737] sysname      : Linux
-[02:07:49.737] release      : 7.0.0-1019-azure
-[02:07:49.737] version      : #20-Ubuntu SMP PREEMPT Mon Oct 19 22:41:16 UTC 2026
-[02:07:49.737] machine      : x86_64
-[02:07:49.737] nodename     : runnervmwuk1x
-[02:07:49.737] pid          : 2613
-[02:07:49.737] pointer bits : 64
-[02:07:49.737] page size    : 4096 bytes
-[02:07:49.737] compiler     : 15.2.0
-[02:07:49.737] target arch  : x86-64 (AMD64)
-[02:07:49.737] byte order   : little-endian
-[02:07:49.737] cpu          : model name	: AMD EPYC 7763 64-Core Processor
-[02:07:49.737] ======================================================================
-[02:07:49.737] CASE - heap Use After Free (README 三)
-[02:07:49.737] ======================================================================
-[02:07:49.737] free() does not necessarily unmap the VMA; the address stays
-[02:07:49.737] valid while the object lifetime has already ended.
-[02:07:49.737] A plain run often prints 100 and does NOT crash - that is why
-[02:07:49.737] ASan is required to detect this class of bug deterministically.
-[02:07:49.737] child exited normally with code 158
-[02:07:49.737] child observed *p = 158 after free() (meaningless, UB)
-[02:07:49.737] ======================================================================
-[02:07:49.737] heap VMA context
-[02:07:49.737] ======================================================================
-[02:07:49.737] fresh malloc(64 KiB) @ 0x5fd6a0aa1440
-[02:07:49.737]   malloc block           0x5fd6a0aa1440 -> 0x5fd6a0a9e000-0x5fd6a0abf000 rw-p [heap]
-[02:07:49.737] build with -DLAB_ENABLE_ASAN=ON then run ./uaf to get a
-[02:07:49.737] 'ERROR: AddressSanitizer: heap-use-after-free' report.
-[02:07:49.737] FINAL: PASS (demonstration completed; parent never crashed)
-[02:07:49.737] log file: /home/runner/work/_temp/lab-logs/ubuntu-26.04-x86_64__uaf.log
+[11:35:09.169] ======================================================================
+[11:35:09.169] linux-memory-lab :: uaf
+[11:35:09.169] ======================================================================
+[11:35:09.169] ======================================================================
+[11:35:09.169] ENVIRONMENT
+[11:35:09.169] ======================================================================
+[11:35:09.169] sysname      : Linux
+[11:35:09.169] release      : 7.0.0-1016-aws
+[11:35:09.169] version      : #17-Ubuntu SMP PREEMPT Mon Oct 19 17:36:33 UTC 2026
+[11:35:09.169] machine      : x86_64
+[11:35:09.169] nodename     : ip-10-0-142-244
+[11:35:09.169] pid          : 2730
+[11:35:09.169] pointer bits : 64
+[11:35:09.169] page size    : 4096 bytes
+[11:35:09.169] compiler     : 15.2.0
+[11:35:09.169] target arch  : x86-64 (AMD64)
+[11:35:09.169] byte order   : little-endian
+[11:35:09.169] cpu          : model name	: Intel(R) Xeon(R) 6975P-C
+[11:35:09.169] ======================================================================
+[11:35:09.169] CASE - heap Use After Free (README 三)
+[11:35:09.169] ======================================================================
+[11:35:09.169] free() does not necessarily unmap the VMA; the address stays
+[11:35:09.169] valid while the object lifetime has already ended.
+[11:35:09.169] A plain run often prints 100 and does NOT crash - that is why
+[11:35:09.169] ASan is required to detect this class of bug deterministically.
+[11:35:09.169] child exited normally with code 5
+[11:35:09.169] child observed *p = 5 after free() (meaningless, UB)
+[11:35:09.169] ======================================================================
+[11:35:09.169] heap VMA context
+[11:35:09.169] ======================================================================
+[11:35:09.169] fresh malloc(64 KiB) @ 0x5fdae1e08440
+[11:35:09.169]   malloc block           0x5fdae1e08440 -> 0x5fdae1e05000-0x5fdae1e26000 rw-p [heap]
+[11:35:09.169] build with -DLAB_ENABLE_ASAN=ON then run ./uaf to get a
+[11:35:09.169] 'ERROR: AddressSanitizer: heap-use-after-free' report.
+[11:35:09.169] FINAL: PASS (demonstration completed; parent never crashed)
+[11:35:09.169] log file: /home/runner/work/_temp/lab-logs/ubuntu-26.04-x86_64__uaf.log
